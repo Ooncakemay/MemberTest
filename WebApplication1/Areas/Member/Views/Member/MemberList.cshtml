@@ -1,0 +1,79 @@
+﻿@*@model List<WebApplication1.Areas.Member.Models.SEMember.SEMemberMoudle>*@
+@model MvcPaging.IPagedList< WebApplication1.Areas.Member.Models.SEMember.SEMemberMoudle>
+@using MvcPaging
+@{
+    ViewBag.Title = "MemberList";
+    Layout = null;
+}
+
+<div class="tbContent">
+
+
+    <div style="" margin-bottom 10px;">共 @Model.TotalItemCount  筆資料</div>
+    <table class="data1" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr style="border-bottom: 1px solid black;">
+                <th style="width: 50px" scope="col">
+                    序號
+                </th>
+                <th style="width: 100px" scope="col">
+                    客戶代碼
+                </th>
+                <th scope="col">
+                    會籍
+                </th>
+                <th scope="col">
+                    會員姓名
+                </th>
+                <th scope="col">
+                    手機號碼
+                </th>
+                <th scope="col">
+                    市話號碼
+                </th>
+                <th style="width: 20%" scope="col">
+                    E-mail
+                </th>
+                <th>
+                    重寄驗證信
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ROWID</td>
+                    <td style="width: 12%; word-break: break-all; word-wrap: break-word;">
+                        @item.strContactID
+                    </td>
+                    <td>@item.strMemberTypeName</td>
+                    <td>@item.strName</td>
+                    <td>@item.strMobile</td>
+                    <td>@item.strPhone</td>
+                    <td style="width: 25%; word-break: break-all; word-wrap: break-word;">
+                        @item.strEMail
+                    </td>
+                    @if (item.ysnActivate.Equals("False"))
+                    {
+                        <td>
+                            <input type="button" onclick=alert("@item.strEMail"); value="重寄驗證信">
+                        </td>
+                    }
+                    else
+                    {
+                        <td> </td>
+                    }
+
+
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+    <div id="divPaging" class="page_box">
+        @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.DisplayTemplate("ListPagination").MaxNrOfPages(ViewBag.CommentPage))
+    </div>
+
+</div>

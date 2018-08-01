@@ -1,0 +1,391 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Member/Views/Shared/_Layout.cshtml";
+}
+
+<input type="button" id="submit" value="匯出" />
+<form id="Form2"></form>
+<div class="divMain">
+    <span style="color:Black; font-size:40px; font-weight:bold">查詢會員</span>
+    <div class="divContent" style="margin-top: 20px">
+
+        <form id="Form1" method="post">
+            <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+                <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+                    <li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="tbSimple" aria-labelledby="ui-id-1" aria-selected="true"><a href="javascript:void(0);" class="tbSimple ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">簡易查詢</a></li>
+                    <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tbAdvence" aria-labelledby="ui-id-2" aria-selected="false"><a href="javascript:void(0);" class="tbAdvence ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2" style="display: none;">進階查詢</a></li>
+                    <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="tbResult" aria-labelledby="ui-id-3" aria-selected="false"><a href="javascript:void(0);" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">查詢結果</a></li>
+                </ul>
+                <div id="tbSimple" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false" style="display: block;">
+                    <div class="tbContent">
+                        <input type="button" class="btnStyle" value="進階查詢">
+                        <hr>
+                        <table style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td class="head">
+                                        會員姓名：
+                                    </td>
+                                    <td>
+                                        <input type="text" name="strName" class="shortText">
+                                    </td>
+                                    <td class="head">
+                                        客戶代碼：
+                                    </td>
+                                    <td>
+                                        <input type="text" name="strContactID" class="shortText">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="head">
+                                        手機號碼：
+                                    </td>
+                                    <td>
+                                        <input type="text" name="strMobile" class="shortText">
+                                    </td>
+                                    <td class="head">
+                                        市話號碼：
+                                    </td>
+                                    <td>
+                                        <input type="text" name="strPhone" class="shortText">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="head">
+                                        Email：
+                                    </td>
+                                    <td colspan="3">
+                                        <input type="text" name="strEMail" class="longText">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <input type="button" class="btnStyle" value="送出" >
+                        <input type="button" class="btnStyle" value="清除" >
+                    </div>
+                </div>
+                <div id="tbAdvence" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+                    <div class="tbContent">
+                        <input type="button" class="btnStyle" value="簡易查詢" >
+                        <hr>
+                        <table style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td class="head">
+                                        會員姓名：
+                                    </td>
+                                    <td>
+                                        <input type="text" name="strName" class="shortText" onblur="synData()">
+                                    </td>
+                                    <td class="head">
+                                        客戶代碼：
+                                    </td>
+                                    <td>
+                                        <input type="text" name="strContactID" class="shortText" onblur="synData()">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="head">
+                                        手機號碼：
+                                    </td>
+                                    <td>
+                                        <input type="text" name="strMobile" class="shortText" onblur="synData()">
+                                    </td>
+                                    <td class="head">
+                                        市話號碼：
+                                    </td>
+                                    <td>
+                                        <input type="text" name="strPhone" class="shortText" onblur="synData()">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="head">
+                                        Email：
+                                    </td>
+                                    <td colspan="3">
+                                        <input type="text" name="strEMail" class="longText" onblur="synData()">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="head">
+                                        消費日期：
+                                    </td>
+                                    <td>
+                                        <input type="text" name="OrderDate" class="dateText hasDatepicker" id="dp1490925305678">
+                                    </td>
+                                    <td class="head">
+                                        商品代碼：
+                                    </td>
+                                    <td>
+                                        <input type="text" name="PromotionProductID" class="shortText">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="head">
+                                        入會日期：
+                                    </td>
+                                    <td>
+                                        <input type="text" name="dtmActivated" class="dateText hasDatepicker" readonly="" id="dp1490925305679">
+                                    </td>
+                                    <td class="head">
+                                        會籍到期日：
+                                    </td>
+                                    <td>
+                                        <input type="text" name="dtmExpired" class="dateText hasDatepicker" id="dp1490925305680">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="head">
+                                        會員會籍：
+                                    </td>
+                                    <td>
+                                        <select id="ddlstrMemberType" name="ddlstrMemberType" class="ddlStyle" onchange="ddlstrMemberTypeChange()">
+                                            <option value="">All</option>
+                                            <option value="1">一般會員</option>
+                                            <option value="2">VIP會員</option>
+                                            <option value="3">待驗證會員</option>
+                                            <option value="4">非會員</option>
+                                        </select>
+                                        <input type="hidden" name="strMemberType" id="strMemberType">
+                                    </td>
+                                    <td class="head">
+                                        會員縣市：
+                                    </td>
+                                    <td>
+                                        <select id="ddlstrCity" name="ddlstrCity" class="ddlStyle" onchange="ddlstrCityChange()">
+                                            <option value="">All</option>
+                                            <option value="台北市">台北市</option>
+                                            <option value="基隆市">基隆市</option>
+                                            <option value="新北市">新北市</option>
+                                            <option value="宜蘭縣">宜蘭縣</option>
+                                            <option value="新竹市">新竹市</option>
+                                            <option value="新竹縣">新竹縣</option>
+                                            <option value="桃園市">桃園市</option>
+                                            <option value="苗栗縣">苗栗縣</option>
+                                            <option value="台中市">台中市</option>
+                                            <option value="彰化縣">彰化縣</option>
+                                            <option value="南投縣">南投縣</option>
+                                            <option value="嘉義市">嘉義市</option>
+                                            <option value="嘉義縣">嘉義縣</option>
+                                            <option value="雲林縣">雲林縣</option>
+                                            <option value="台南市">台南市</option>
+                                            <option value="高雄市">高雄市</option>
+                                            <option value="南海諸島">南海諸島</option>
+                                            <option value="澎湖縣">澎湖縣</option>
+                                            <option value="屏東縣">屏東縣</option>
+                                            <option value="台東縣">台東縣</option>
+                                            <option value="花蓮縣">花蓮縣</option>
+                                            <option value="金門縣">金門縣</option>
+                                            <option value="連江縣">連江縣</option>
+                                        </select>
+                                        <input type="hidden" name="strCity" id="strCity">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="head">
+                                        會員點數：
+                                    </td>
+                                    <td colspan="3">
+                                        開始點數：<input type="text" name="PointStart" class="intText">
+                                        ~
+                                        結束點數：<input type="text" name="PointEnd" class="intText">
+                                        <span style="color:Red">(結束點數不可小於開始點數)</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="head">
+                                        會員生日月：
+                                    </td>
+                                    <td colspan="3">
+                                        <input type="checkbox" name="chkMemberBirthMonth" value="1">1月&nbsp;
+                                        <input type="checkbox" name="chkMemberBirthMonth" value="2">2月&nbsp;
+                                        <input type="checkbox" name="chkMemberBirthMonth" value="3">3月&nbsp;
+                                        <input type="checkbox" name="chkMemberBirthMonth" value="4">4月&nbsp;
+                                        <input type="checkbox" name="chkMemberBirthMonth" value="5">5月&nbsp;
+                                        <input type="checkbox" name="chkMemberBirthMonth" value="6">6月&nbsp;
+                                        <input type="checkbox" name="chkMemberBirthMonth" value="7">7月&nbsp;
+                                        <input type="checkbox" name="chkMemberBirthMonth" value="8">8月&nbsp;
+                                        <input type="checkbox" name="chkMemberBirthMonth" value="9">9月&nbsp;
+                                        <input type="checkbox" name="chkMemberBirthMonth" value="10">10月&nbsp;
+                                        <input type="checkbox" name="chkMemberBirthMonth" value="11">11月&nbsp;
+                                        <input type="checkbox" name="chkMemberBirthMonth" value="12">12月&nbsp;
+                                        <input type="hidden" name="MemberBirthMonth" id="MemberBirthMonth" value="">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="head">
+                                        寶寶生日：
+                                    </td>
+                                    <td colspan="3">
+                                        <input type="text" name="dtmBabyBirthStart" class="dateText hasDatepicker" id="dp1490925305681">
+                                        &nbsp; ~ &nbsp;
+                                        <input type="text" name="dtmBabyBirthEnd" class="dateText hasDatepicker" id="dp1490925305682">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="head">
+                                        寶寶生日月：
+                                    </td>
+                                    <td colspan="3">
+                                        <input type="checkbox" name="chkBabyBirthMonth" value="1">1月&nbsp;
+                                        <input type="checkbox" name="chkBabyBirthMonth" value="2">2月&nbsp;
+                                        <input type="checkbox" name="chkBabyBirthMonth" value="3">3月&nbsp;
+                                        <input type="checkbox" name="chkBabyBirthMonth" value="4">4月&nbsp;
+                                        <input type="checkbox" name="chkBabyBirthMonth" value="5">5月&nbsp;
+                                        <input type="checkbox" name="chkBabyBirthMonth" value="6">6月&nbsp;
+                                        <input type="checkbox" name="chkBabyBirthMonth" value="7">7月&nbsp;
+                                        <input type="checkbox" name="chkBabyBirthMonth" value="8">8月&nbsp;
+                                        <input type="checkbox" name="chkBabyBirthMonth" value="9">9月&nbsp;
+                                        <input type="checkbox" name="chkBabyBirthMonth" value="10">10月&nbsp;
+                                        <input type="checkbox" name="chkBabyBirthMonth" value="11">11月&nbsp;
+                                        <input type="checkbox" name="chkBabyBirthMonth" value="12">12月&nbsp;
+                                        <input type="hidden" name="BabyBirthMonth" id="BabyBirthMonth" value="">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <input type="button" class="btnStyle" value="送出" >
+                        <input type="button" class="btnStyle" value="清除">
+                    </div>
+                </div>
+                <div id="tbResult" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+                </div>
+            </div>
+            <input type="hidden" id="searchType" name="searchType" value="Simple">
+            <input type="hidden" id="pagecurrentPage" name="currentPage" value="1">
+            <input type="hidden" id="page" name="page" value="1">
+        </form>
+    </div>
+
+</div>
+<div id="divloading" style="display: none;">
+    <div id="loadMessage"></div>
+</div>
+<div id="mask" style="display: none;"></div>
+
+
+<script>
+    $(document).ready(function () {
+        $( "input[value='進階查詢']" ).click(function() {
+            $("#tbAdvence").show();
+            $("#tbSimple").hide();
+            $("#ui-id-1").text("進階查詢");
+            transport();
+        });
+        $("#submit").click(function () {
+            ExportExcel();
+        });
+
+        $( "input[value='簡易查詢']" ).click(function() {
+            $("#tbAdvence").hide();
+            $("#tbSimple").show();
+            $("#ui-id-1").text("簡易查詢");
+        });
+
+
+        $("#ui-id-3").click(function() {
+            $("#tbAdvence").hide();
+            $("#tbSimple").hide();
+            $("#tbResult").show();
+
+        });
+
+
+        $("#ui-id-1").click(function() {
+            if($("#ui-id-1").text() == "簡易查詢"){
+                $("#tbSimple").show();
+
+            }else{
+                $("#tbAdvence").show();
+
+            }
+
+            $("#tbResult").hide();
+
+        });
+
+        $( "input[value='送出']" ).click(function() {
+            UpdateSaleChatState();
+        
+        });
+
+        $( "input[value='清除']" ).click(function() {
+            var target =   $("#ui-id-1").text();
+            if(target == "簡易查詢"){
+                $("#tbSimple table>tbody input").val("");
+            }else{
+                $("#tbAdvence table>tbody input").val("");
+                $('#ddlstrMemberType').prop('selectedIndex',0);
+                $('#ddlstrCity').prop('selectedIndex',0);
+                $('input:checkbox').removeAttr('checked');
+            }
+
+        });
+        //刷新功能畫面上方的對話縮合資料
+        //ui-id-3  strName, strContactID, strMobile, strPhone, strEMail);
+         
+  
+        
+     
+
+    });
+    function transport() {
+        var list = $("#tbSimple input[type='text']").map(function () {
+            return $(this).val();
+        }).get();
+        var nextlist = $("#tbAdvence input[type='text']").map(function () {
+            return $(this);
+        }).get();
+        var number = 5;
+        for (var i = 0; i < number; i++) { nextlist[i].val(list[i]); }
+    }
+    var flag = false;
+
+    function UpdateSaleChatState(page) {
+        flag = false;
+        $.ajax({
+            url: '@Url.Action("MemberList", "Member", new { Area = "Member" })',
+            data: $("#tbSimple :input").serialize() + '&page=' + page,
+            type: 'POST',
+            async: true,//異步(非同步)
+            success: function (data) {
+                flag = true;
+                $('#tbResult').html(data);
+                $("#tbAdvence").hide();
+                $("#tbSimple").hide();
+                $("#tbResult").show();
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('出現錯誤');
+            }
+        });
+
+    }//End UpdateSaleChatState()
+
+
+    function ExportExcel() {
+        if (flag) {
+            $.ajax({
+                url: '@Url.Action("Export", "Member", new { Area = "Member" })',
+                data: $("#tbSimple :input").serialize(),
+                type: 'POST',
+                async: true,//異步(非同步)
+                success: function (response) {
+                    alert("狀態:" + response.status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('出現錯誤');
+                }
+            });
+        } else {
+            alert("沒有任何查詢結果，無法匯出")
+        }
+    }
+   
+
+</script>
+

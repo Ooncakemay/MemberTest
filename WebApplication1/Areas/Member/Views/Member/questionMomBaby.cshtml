@@ -1,0 +1,44 @@
+﻿@model List<WebApplication1.Areas.Member.Models.MBMoudle>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>questionMomBaby</title>
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <div>
+        <form id="Form2">
+            <table>
+                <tr>
+                    <th>媽媽姓名</th>
+                    <th>寶寶姓名</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.momoName</td>
+                        <td>@item.babyName</td>
+                    </tr>
+                }
+            </table>
+        </form>
+      
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#send").click(function () {
+            ExportExcel();
+        });
+    });
+
+
+
+</script>

@@ -1,0 +1,79 @@
+﻿
+@model MvcPaging.PaginationModel
+
+<div class="SeparatorLine color3"></div>
+<ul>
+    @{
+        string thisPage = "1";
+        foreach (var link in Model.PaginationLinks)
+        {
+            if (link.IsCurrent)
+            {
+                thisPage = link.PageIndex.ToString();
+            }
+        }
+    }
+
+    @foreach (var link in Model.PaginationLinks)
+    {
+        @BuildLink(link)
+    }
+
+    @helper BuildLink(MvcPaging.PaginationLink link)
+    {
+
+if (link.DisplayText == "«")
+{
+    if (Model.PaginationLinks.Count >= 1)
+    {
+        if (link.Url != null)
+        {
+                <li><a class="pageClick" datapage="@link.PageIndex"><</a></li>
+        }
+        else
+        { }
+    }
+}
+else if (link.DisplayText == "»")
+{
+
+    if (link.Url != null)
+    {
+            @*@Ajax.ActionLink(@Resources.AcerCloudSDK.NextPage + " >", "Post", "Board", new { page = link.PageIndex, PostID = ViewBag.ID }, new AjaxOptions() { UpdateTargetId = "divFaqContent", HttpMethod = "Post" }, new { area = "board" })*@
+            <li><a class="pageClick" datapage="@link.PageIndex">></a></li>
+    }
+}
+else if (link.DisplayText == "...")
+{
+        @link.DisplayText;
+}
+else
+{
+
+    if (link.IsCurrent)
+    {
+            @*@Ajax.ActionLink(link.DisplayText, "Post", "Board", new { page = link.PageIndex, PostID = ViewBag.ID }, new AjaxOptions() { UpdateTargetId = "divFaqContent", HttpMethod = "Post" }, null)*@
+            <li class="current"><a>@link.DisplayText</a></li>
+    }
+    else
+    {
+            @*@Ajax.ActionLink(link.DisplayText, "Post", "Board", new { page = link.PageIndex, PostID = ViewBag.ID }, new AjaxOptions() { UpdateTargetId = "divFaqContent", HttpMethod = "Post" }, null)*@
+            <li><a class="pageClick" datapage="@link.PageIndex">@link.DisplayText</a></li>
+    }
+
+}
+
+}
+</ul>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.pageClick').each(function (i, item) {
+            var page = $(item).attr('datapage');
+            $(item).attr('href', '#').click(function () { UpdateSaleChatState(page); });
+        });
+    });
+  
+
+</script>
+

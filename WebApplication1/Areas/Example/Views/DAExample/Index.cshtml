@@ -1,0 +1,27 @@
+﻿@model List<WebApplication1.Areas.Example.Models.Exercise.ExerciseModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@*@{ var data = (IEnumerable<WebApplication1.Areas.Example.Models.Exercise.ExerciseModel>)Model;}*@
+
+<table border="1">
+    <tr>
+        <th>名</th>
+        <th>姓</th>
+        <th>地址</th>
+        <th>信箱</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.First_nameM</td>
+            <td>@item.Last_NameM</td>
+            <td>@item.AddressM</td>
+            <td>@item.EmailM</td>
+        </tr>
+    }
+    
+
+</table>

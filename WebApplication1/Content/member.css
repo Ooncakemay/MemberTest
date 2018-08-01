@@ -1,0 +1,71 @@
+﻿
+    .divMain
+    {
+        text-align:center;
+        padding:30px;
+        height:100%;
+        font-family: "微軟正黑體", "新細明體", "Arial";
+    }
+    .divContent
+    {
+        background-color:White;
+    }
+    .tbContent
+    {
+        margin: 10px;
+        text-align: left;
+    }
+    table tr th
+    {
+        text-align: left;
+    }
+    hr
+    {
+        margin-top: 20px;
+        margin-bottom: 30px;
+        width: 100%;
+    }
+    table tr td.head
+    {
+        text-align: right;
+        height: 50px;
+    }
+    table tr td
+    {
+        text-align: left;
+    }
+    .shortText, .dateText, .ddlStyle
+    {
+        width: 200px;
+    }   
+    .longText
+    {
+        width: 714px;
+    }
+    .intText
+    {
+        width: 50px;
+    }
+    #divPaging
+    {
+        text-align: right;
+    }
+    .btnStyle
+    {
+        width: 90px;
+        font-size: medium !important;
+        height: 30px;
+    }
+    .divSearch
+    {
+        margin: 0px auto 30px auto;
+        width:100%;	
+    }
+    .audithead
+    {
+        text-align: right;
+        height: 40px;
+        width: 15%;
+        padding-right: 10px;
+        min-width: 100px;
+    }

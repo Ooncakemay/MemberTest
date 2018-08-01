@@ -1,0 +1,45 @@
+﻿@model MvcPaging.IPagedList<WebApplication1.Areas.Message.Models.MessageModel>
+
+@using MvcPaging
+@{
+    ViewBag.Title = "getMessage";
+    Layout = null;
+}
+@Scripts.Render("~/bundles/jquery")
+
+<h2>留言紀錄</h2>
+
+<ul>
+    @*<li>共 @Model.Count 筆記錄  時間格式  @string.Format("{0:D}", v.CreateTime);</li>*@
+</ul>
+
+
+<table border="1">
+
+    <tr>
+        <th>編號</th>
+        <th>標題</th>
+        <th>內容</th>
+        <th>姓名</th>
+        <th>時間</th>
+        <th>刪除</th>
+        <th>編輯</th>
+    </tr>
+
+    @foreach (var v in Model)
+    {
+        <tr>
+            <td>@v.id</td>
+            <td>@v.Title</td>
+            <td>@v.Content</td>
+            <td>@v.Name</td>
+            <td>@string.Format("{0:D}", v.CreateTime);</td>
+            <td> <input type="button" id="Button_Delete" value="刪除" onclick="DeleteData('@v.id');" /> </td>
+            <td> <input type="button" id="Button_Call" value="編輯" onclick="CallData('@v.id','@v.Title','@v.Content','@v.Name');" /> </td>
+        </tr> 
+    }
+
+</table>
+<div id="divPaging" class="page_box">
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.DisplayTemplate("ListPagination").MaxNrOfPages(ViewBag.CommentPage))
+</div>

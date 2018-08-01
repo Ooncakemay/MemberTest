@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+   <ConnectingPool>
+    <Connect Name="FAQ" ConnectingString="Xy/C/mqJJLIvLvkruY/qv+oGtfghX2AUd9C4Nl25+i5CQoSkPfOHcJZYeCQuQLTveW6rgPeC4nM1DOPkRUxL+a0D2x6VHo5tL/3CCi0JzMDCpnHylY6wQ+6IcStWMd+tbke4jONK0YFxGlyzRXjMzBROkZoAwutTnvRCZCqeFWeM0rlj9zWXZLKy07iYw3qda7OXPloVIyuDzDkqKxDzfg==" />
+    
+   </ConnectingPool>
+  <SQLCommands>
+    
+    <!-- 取得Exercise資料(關鍵字查詢姓氏) Author:Chiahui Updater: LastUpdateDate:2018/7/27 -->
+    <SQL ID="GetData" CommandType="Text" CommandTimeout="" PageCount="5" ConnectName="FAQ">
+      <![CDATA[ 
+        SELECT First_name,Last_Name,Address,Email
+        FROM Exercise
+        WHERE Last_Name like '%'+ @key +'%'
+    ]]>
+    </SQL>
+    <!-- 取得SEMember資料 Author:CHUI LUN Updater: LastUpdateDate:2018/7/27 -->
+    <SQL ID="GetSEMemberData" CommandType="Text" CommandTimeout="" PageCount="5" ConnectName="FAQ">
+      <![CDATA[ 
+      SELECT ROW_NUMBER() OVER(ORDER BY strMemberID) AS ROWID,ysnActivate,strContactID,strEMail,strName,strMobile,strPhone,strMemberTypeName,strMemberID,strPassword,strMobile,dtmBirth,strGender,strCity
+      FROM SE_Member
+      LEFT JOIN BS_MemberType
+      ON SE_Member.strMemberType = BS_MemberType.strMemberTypeID
+      WHERE strName like '%'+ @strName +'%' 
+      AND strContactID like '%'+ @strContactID +'%' 
+      AND strEMail like '%'+ @strEMail +'%' 
+      AND strMobile like '%'+ @strMobile +'%' 
+      AND strPhone like '%'+ @strPhone +'%'
+       ]]>
+    </SQL>
+    <SQL ID="showMessage" CommandType="Text" CommandTimeout="" PageCount="5" ConnectName="FAQ">
+      <![CDATA[ 
+      SELECT * FROM Message
+      ORDER BY CreateTime DESC
+       ]]>
+    </SQL>
+    <SQL ID="insertMessage" CommandType="Text" CommandTimeout="" PageCount="5" ConnectName="FAQ">
+    <![CDATA[ 
+       INSERT INTO "Message" ("id", "Name","Content","CreateTime","Title")
+      VALUES (newid(), @Name , @Content ,GETDATE(), @Title)
+       ]]>
+    </SQL>
+    <SQL ID="updateMessage" CommandType="Text" CommandTimeout="" PageCount="5" ConnectName="FAQ">
+      <![CDATA[ 
+       UPDATE Message
+       SET Name = @Name, Title = @Title, Content = @Title, CreateTime = GETDATE()
+       WHERE id = @id 
+       ]]>
+    </SQL>
+    <SQL ID="deleteMessage" CommandType="Text" CommandTimeout="" PageCount="5" ConnectName="FAQ">
+      <![CDATA[ 
+       DELETE FROM Message
+       WHERE id =  @id;
+       ]]>
+    </SQL>
+    <SQL ID="GetSE_Baby" CommandType="Text" CommandTimeout="" PageCount="5" ConnectName="FAQ">
+      <![CDATA[ 
+       SELECT *  
+       FROM SE_Baby
+       ]]>
+    </SQL>
+    
+    
+    
+  </SQLCommands>
+</root>

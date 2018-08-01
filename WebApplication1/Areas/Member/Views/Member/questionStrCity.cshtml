@@ -1,0 +1,55 @@
+﻿@model List<WebApplication1.Areas.Member.Models.SEMember.SEMemberMoudle>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+    @Scripts.Render("~/bundles/jquery")
+
+    <meta name="viewport" content="width=device-width" />
+    <title>questionStrCity</title>
+    
+</head>
+<body>
+    <select id="city">
+        @foreach (var item in Model)
+        {
+            <option value="@item.strCity">@item.strCity</option>
+        }
+    </select>
+    <input id="submit" type="button" value="送出"/>
+    <div id="memberList">
+
+    </div>
+   
+</body>
+
+</html>
+<script type="text/javascript">
+       // $(document).ready(function () {
+        $(document).ready(function () {
+            $("#submit").click(function () {
+                UpdateSaleChatState();
+            });
+        });
+        function UpdateSaleChatState(page) {
+            $.ajax({
+                url: '@Url.Action("getMemberCity", "Member", new { Area = "Member" })',
+                data: 'page=' + page + "&city=" + $("#city").val(),
+                type: 'POST',
+                async: true,//異步(非同步)
+                success: function (data) {
+                    $('#memberList').html(data);
+               },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('出現錯誤');
+                }
+            });
+
+        }//End UpdateSaleChatState()
+</script>

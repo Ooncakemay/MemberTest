@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "MessageWrite";
+    Layout = "";
+}
+@Scripts.Render("~/bundles/jquery")
+<form id="InputForm">
+    <h3>標題</h3>
+    <input id="Box_Title" name="Title" type="text" />
+    <h3>內容</h3>
+    <input id="Box_Content" name="Content" type="text" />
+    <h3>姓名</h3>
+    <input id="Box_Name" name="Name" type="text" />
+
+</form>
+<input id="Button_Check" type="button" value="儲存" onclick="Check();" /><p>
+    <input id="CheckType" type="hidden" value="new" />

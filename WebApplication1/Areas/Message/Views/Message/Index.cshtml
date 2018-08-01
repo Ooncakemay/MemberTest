@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+@Scripts.Render("~/bundles/jquery")
+
+<h2>歡迎來到留言板!</h2>
+@Html.Action("MessageWrite", "Message", new { area = "Message" })
+<div id="DataArea">
+</div>
+
+
+
+
+<script type="text/javascript">
+
+//完成頁面載入，後執行表格資料載入
+    $(document).ready(function () {
+        LoadData('1');
+    });
+
+    //按下"儲存"鈕
+    function Check() {
+
+
+        if ($("#CheckType").val() == 'new') {
+
+
+        var NewPage = '@Url.Action("insertMessage", "Message", new{area="Message"})'
+
+            $.ajax({
+
+                url: NewPage,
+                // data:{Title:$("#Box_Title").val(),Content:$("#Box_Content").val()},
+                data: $('#InputForm').serialize(),
+                type: "POST",
+                datatype: "json",
+                traditional: true,
+                async: true,
+                success: function (response) {
+                    LoadData();
+                    alert('完成留言');
+                    $('#InputForm').trigger("reset");
+                    alert("status:" + response.status);
+                }
+
+            })
+
+        }
+        else {
+
+          $.ajax({
+
+            url: '@Url.Action("updateMessage", "Message", new{area= "Message" })',
+            data:$('#InputForm').serialize()+ '&id=' + $("#CheckType").val(),
+            type: "POST",
+            datatype: "json",
+            traditional: true,
+            async: true,
+            success: function (response) {
+               
+                LoadData();
+                $("#CheckType").val('new');
+                alert('完成編輯');
+                $('#InputForm').trigger("reset");
+                alert("status:" + response.status);
+
+            }
+
+        })
+
+        }
+
+
+     }
+
+     //按下"刪除"鈕
+     function DeleteData(id_num) {
+
+         $.ajax({
+
+             url: '@Url.Action("deleteMessage", "Message", new{area= "Message" })',
+             data: { id: id_num },
+             type: "POST",
+             traditional: true,
+             async: true,
+        
+             success: function (response) {
+                 LoadData();
+                 alert('已刪除' + id_num);
+                 alert("status:" + response.status);
+             }
+
+         })
+
+
+     }
+
+
+     //按下"編輯"鈕
+     function CallData(Called_ID, Called_Title, Called_Content,Called_Name) {
+
+         alert('更新' + Called_ID);
+         $("#CheckType").val(Called_ID);
+         $("#Box_Title").val(Called_Title);
+         $("#Box_Content").val(Called_Content);
+         $("#Box_Name").val(Called_Name);
+         
+
+
+
+     }
+
+
+
+     //按下"編輯"鈕
+     function UpdateData(id_num) {
+
+         LoadData('1');
+
+         alert('更新' + id_num);
+
+
+     }
+
+     //載入表格資料
+     function LoadData(page) {
+
+         $.ajax({
+
+             url: '@Url.Action("getMessage", "Message", new{area="Message"})',
+             data: { page: page },
+             type: "POST",
+             traditional: true,
+             async: true,
+             success: function (response) {
+                 $("#DataArea").empty();
+                 $("#DataArea").html(response);
+             }
+
+         })
+
+
+     }
+
+
+
+
+
+
+
+</script>

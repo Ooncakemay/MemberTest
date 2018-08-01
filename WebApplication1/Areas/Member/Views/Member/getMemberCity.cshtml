@@ -1,0 +1,25 @@
+﻿@model MvcPaging.IPagedList<WebApplication1.Areas.Member.Models.SEMember.SEMemberMoudle>
+@using MvcPaging
+@{
+    Layout = null;
+}
+<table>
+    <tr>
+        <th>姓名</th>
+        <th>生日</th>
+        <th>縣市</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.strName</td>
+            <td>@item.dtmBirth</td>
+            <td>@item.strCity</td>
+        </tr>
+
+    }
+</table>
+<div id="divPaging" class="page_box">
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.DisplayTemplate("ListPagination").MaxNrOfPages(ViewBag.CommentPage))
+</div>
